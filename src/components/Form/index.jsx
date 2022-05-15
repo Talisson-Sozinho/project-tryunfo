@@ -24,6 +24,7 @@ export default class Form extends React.Component {
           Nome
           <input
             id="name-input"
+            name="nameInput"
             data-testid="name-input"
             type="text"
             value={ cardName }
@@ -35,6 +36,7 @@ export default class Form extends React.Component {
           Descrição
           <textarea
             id="description-input"
+            name="descriptionInput"
             data-testid="description-input"
             value={ cardDescription }
             onChange={ onInputChange }
@@ -45,6 +47,7 @@ export default class Form extends React.Component {
           Attr01
           <input
             id="attr1-input"
+            name="attr1Input"
             data-testid="attr1-input"
             type="number"
             value={ cardAttr1 }
@@ -56,6 +59,7 @@ export default class Form extends React.Component {
           Attr02
           <input
             id="attr2-input"
+            name="attr2Input"
             data-testid="attr2-input"
             type="number"
             value={ cardAttr2 }
@@ -67,6 +71,7 @@ export default class Form extends React.Component {
           Attr03
           <input
             id="attr3-input"
+            name="attr3Input"
             data-testid="attr3-input"
             type="number"
             value={ cardAttr3 }
@@ -78,6 +83,7 @@ export default class Form extends React.Component {
           Imagem
           <input
             id="image-input"
+            name="imageInput"
             data-testid="image-input"
             type="text"
             value={ cardImage }
@@ -89,6 +95,7 @@ export default class Form extends React.Component {
           Raridade
           <select
             id="rare-input"
+            name="rareInput"
             data-testid="rare-input"
             value={ cardRare }
             onChange={ onInputChange }
@@ -103,6 +110,7 @@ export default class Form extends React.Component {
           Super Trybe Trunfo
           <input
             id="trunfo-input"
+            name="trunfoInput"
             data-testid="trunfo-input"
             type="checkbox"
             checked={ cardTrunfo }
