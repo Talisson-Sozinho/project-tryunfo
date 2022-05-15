@@ -6,6 +6,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.onInputChange = this.onInputChange.bind(this);
+    this.verifyInputs = this.verifyInputs.bind(this);
     this.state = {
       nameInput: '',
       descriptionInput: '',
@@ -25,7 +26,49 @@ class App extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
       [name]: value,
-    });
+    }, this.verifyInputs);
+  }
+
+  verifyInputs() {
+    let allValidFields = true;
+    const maxAttributesSum = 210;
+    const maxAttributeValue = 90;
+    const minAttributeValue = 0;
+    const {
+      nameInput,
+      descriptionInput,
+      imageInput,
+      rareInput,
+      attr1Input,
+      attr2Input,
+      attr3Input,
+    } = this.state;
+
+    if (!nameInput || !descriptionInput || !imageInput || !rareInput) {
+      allValidFields = false;
+    }
+
+    if (Number(attr1Input) > maxAttributeValue
+      || Number(attr2Input) > maxAttributeValue
+      || Number(attr3Input) > maxAttributeValue) {
+      allValidFields = false;
+    }
+
+    if (Number(attr1Input) < minAttributeValue
+      || Number(attr2Input) < minAttributeValue
+      || Number(attr3Input) < minAttributeValue) {
+      allValidFields = false;
+    }
+
+    if (Number(attr1Input) + Number(attr2Input) + Number(attr3Input) > maxAttributesSum) {
+      allValidFields = false;
+    }
+
+    if (allValidFields) {
+      this.setState({ isSaveButtonDisabled: false });
+    } else {
+      this.setState({ isSaveButtonDisabled: true });
+    }
   }
 
   render() {
