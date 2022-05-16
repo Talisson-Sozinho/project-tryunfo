@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './components/Card';
+import Deck from './components/Deck';
 import Form from './components/Form';
 
 class App extends React.Component {
@@ -20,7 +21,7 @@ class App extends React.Component {
       trunfoInput: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
-      pileCards: [],
+      deckList: [],
     };
   }
 
@@ -43,7 +44,7 @@ class App extends React.Component {
       rareInput,
       trunfoInput,
       hasTrunfo,
-      pileCards }) => {
+      deckList }) => {
       const cardObject = {
         nameInput,
         descriptionInput,
@@ -56,7 +57,7 @@ class App extends React.Component {
       };
       return {
         hasTrunfo: hasTrunfo || trunfoInput,
-        pileCards: [...pileCards, cardObject],
+        deckList: [...deckList, cardObject],
       };
     }, this.resetFields);
   }
@@ -127,6 +128,7 @@ class App extends React.Component {
       imageInput,
       rareInput,
       trunfoInput,
+      deckList,
       hasTrunfo,
       isSaveButtonDisabled,
     } = this.state;
@@ -156,6 +158,9 @@ class App extends React.Component {
           cardImage={ imageInput }
           cardRare={ rareInput }
           cardTrunfo={ trunfoInput }
+        />
+        <Deck
+          deckList={ deckList }
         />
       </>
     );
