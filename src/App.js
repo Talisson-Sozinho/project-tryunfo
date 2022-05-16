@@ -7,6 +7,8 @@ class App extends React.Component {
     super();
     this.onInputChange = this.onInputChange.bind(this);
     this.verifyInputs = this.verifyInputs.bind(this);
+    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.resetFields = this.resetFields.bind(this);
     this.state = {
       nameInput: '',
       descriptionInput: '',
@@ -15,9 +17,10 @@ class App extends React.Component {
       attr3Input: '',
       imageInput: '',
       rareInput: 'normal',
-      trunfoInput: '',
+      trunfoInput: false,
       // hasTrunfo
       isSaveButtonDisabled: true,
+      pileCards: [],
     };
   }
 
@@ -27,6 +30,45 @@ class App extends React.Component {
     this.setState({
       [name]: value,
     }, this.verifyInputs);
+  }
+
+  onSaveButtonClick() {
+    this.setState(({
+      nameInput,
+      descriptionInput,
+      attr1Input,
+      attr2Input,
+      attr3Input,
+      imageInput,
+      rareInput,
+      trunfoInput,
+      pileCards }) => {
+      const cardObject = {
+        nameInput,
+        descriptionInput,
+        attr1Input,
+        attr2Input,
+        attr3Input,
+        imageInput,
+        rareInput,
+        trunfoInput,
+      };
+      return { pileCards: [...pileCards, cardObject] };
+    }, this.resetFields);
+  }
+
+  resetFields() {
+    this.setState({
+      nameInput: '',
+      descriptionInput: '',
+      attr1Input: '0',
+      attr2Input: '0',
+      attr3Input: '0',
+      imageInput: '',
+      rareInput: 'normal',
+      trunfoInput: false,
+      isSaveButtonDisabled: true,
+    });
   }
 
   verifyInputs() {
@@ -98,6 +140,7 @@ class App extends React.Component {
           // hasTrunfo,
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.onInputChange }
+          onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card
           cardName={ nameInput }

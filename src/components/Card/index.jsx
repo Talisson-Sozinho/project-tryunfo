@@ -15,7 +15,7 @@ export default class Card extends React.Component {
     } = this.props;
 
     return (
-      <article cardName="card-container">
+      <article className="card-container">
         <header>
           <h1 data-testid="name-card">{cardName}</h1>
         </header>
