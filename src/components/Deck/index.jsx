@@ -4,7 +4,7 @@ import Card from '../Card';
 
 export default class Deck extends React.Component {
   render() {
-    const { deckList } = this.props;
+    const { deckList, removeCard } = this.props;
     return (
       <section className="deck-container">
         {
@@ -18,17 +18,25 @@ export default class Deck extends React.Component {
             rareInput,
             trunfoInput,
           }) => (
-            <Card
-              key={ nameInput }
-              cardName={ nameInput }
-              cardDescription={ descriptionInput }
-              cardAttr1={ attr1Input }
-              cardAttr2={ attr2Input }
-              cardAttr3={ attr3Input }
-              cardImage={ imageInput }
-              cardRare={ rareInput }
-              cardTrunfo={ trunfoInput }
-            />
+            <article key={ nameInput } id="super-trunfo-card">
+              <Card
+                cardName={ nameInput }
+                cardDescription={ descriptionInput }
+                cardAttr1={ attr1Input }
+                cardAttr2={ attr2Input }
+                cardAttr3={ attr3Input }
+                cardImage={ imageInput }
+                cardRare={ rareInput }
+                cardTrunfo={ trunfoInput }
+              />
+              <button
+                data-testid="delete-button"
+                type="button"
+                onClick={ removeCard }
+              >
+                Excluir
+              </button>
+            </article>
           ))
         }
       </section>
@@ -38,4 +46,5 @@ export default class Deck extends React.Component {
 
 Deck.propTypes = {
   deckList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  removeCard: PropTypes.func.isRequired,
 };

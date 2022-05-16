@@ -10,6 +10,7 @@ class App extends React.Component {
     this.verifyInputs = this.verifyInputs.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.resetFields = this.resetFields.bind(this);
+    this.removeCard = this.removeCard.bind(this);
     this.state = {
       nameInput: '',
       descriptionInput: '',
@@ -118,6 +119,13 @@ class App extends React.Component {
     }
   }
 
+  removeCard({ target }) {
+    if (target.parentNode.id === 'super-trunfo-card') {
+      this.setState({ hasTrunfo: false });
+    }
+    target.parentNode.remove();
+  }
+
   render() {
     const {
       nameInput,
@@ -161,6 +169,7 @@ class App extends React.Component {
         />
         <Deck
           deckList={ deckList }
+          removeCard={ this.removeCard }
         />
       </>
     );

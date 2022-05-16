@@ -21,7 +21,8 @@ export default class Card extends React.Component {
         </header>
         <img data-testid="image-card" src={ cardImage } alt={ cardName } />
         {
-          cardTrunfo && <span data-testid="trunfo-card">Super Trunfo</span>
+          cardTrunfo
+          && <span data-testid="trunfo-card">Super Trunfo</span>
         }
         <p data-testid="description-card">{cardDescription}</p>
         <ul>
