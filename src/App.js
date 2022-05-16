@@ -18,7 +18,7 @@ class App extends React.Component {
       imageInput: '',
       rareInput: 'normal',
       trunfoInput: false,
-      // hasTrunfo
+      hasTrunfo: false,
       isSaveButtonDisabled: true,
       pileCards: [],
     };
@@ -42,6 +42,7 @@ class App extends React.Component {
       imageInput,
       rareInput,
       trunfoInput,
+      hasTrunfo,
       pileCards }) => {
       const cardObject = {
         nameInput,
@@ -53,7 +54,10 @@ class App extends React.Component {
         rareInput,
         trunfoInput,
       };
-      return { pileCards: [...pileCards, cardObject] };
+      return {
+        hasTrunfo: hasTrunfo || trunfoInput,
+        pileCards: [...pileCards, cardObject],
+      };
     }, this.resetFields);
   }
 
@@ -123,6 +127,7 @@ class App extends React.Component {
       imageInput,
       rareInput,
       trunfoInput,
+      hasTrunfo,
       isSaveButtonDisabled,
     } = this.state;
 
@@ -137,7 +142,7 @@ class App extends React.Component {
           cardImage={ imageInput }
           cardRare={ rareInput }
           cardTrunfo={ trunfoInput }
-          // hasTrunfo,
+          hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.onInputChange }
           onSaveButtonClick={ this.onSaveButtonClick }
