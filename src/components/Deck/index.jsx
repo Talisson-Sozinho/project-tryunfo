@@ -6,33 +6,78 @@ export default class Deck extends React.Component {
   constructor(props) {
     super(props);
     this.onInputChange = this.onInputChange.bind(this);
+    this.filterDeck = this.filterDeck.bind(this);
     this.state = {
       search: '',
+      rarityFilter: 'todas',
+      isTrunfo: false,
     };
   }
 
   onInputChange({ target }) {
-    const { value } = target;
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
-      search: value,
+      [name]: value,
     });
   }
 
-  render() {
-    const { deckList, removeCard } = this.props;
-    const { search } = this.state;
+  filterDeck() {
+    const { deckList } = this.props;
+    const { search, rarityFilter, isTrunfo } = this.state;
 
-    const renderDeckList = search.length > 0
+    if (isTrunfo) {
+      return [deckList.find(({ trunfoInput }) => trunfoInput === true)];
+    }
+
+    if (rarityFilter !== 'todas') {
+      return deckList.filter(({ nameInput, rareInput }) => (
+        nameInput.includes(search) && rareInput === rarityFilter
+      ));
+    }
+    return search.length > 0
       ? deckList.filter(({ nameInput }) => nameInput.includes(search)) : deckList;
+  }
+
+  render() {
+    const { removeCard } = this.props;
+    const { search, rarityFilter, isTrunfo } = this.state;
+
+    const renderDeckList = this.filterDeck();
 
     return (
       <section className="deck-container">
         <input
           data-testid="name-filter"
+          name="search"
           type="text"
           value={ search }
           onChange={ this.onInputChange }
+          disabled={ isTrunfo }
         />
+        <select
+          data-testid="rare-filter"
+          name="rarityFilter"
+          disabled={ isTrunfo }
+          value={ rarityFilter }
+          onChange={ this.onInputChange }
+        >
+          <option value="todas">todas</option>
+          <option value="normal">normal</option>
+          <option value="raro">raro</option>
+          <option value="muito raro">muito raro</option>
+        </select>
+        <label htmlFor="trunfo-filter">
+          Super Trunfo
+          <input
+            id="trunfo-filter"
+            name="isTrunfo"
+            data-testid="trunfo-filter"
+            type="checkbox"
+            checked={ isTrunfo }
+            onChange={ this.onInputChange }
+          />
+        </label>
         {
           renderDeckList.map(({
             nameInput,
