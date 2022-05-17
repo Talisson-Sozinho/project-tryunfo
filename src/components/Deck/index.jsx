@@ -26,7 +26,7 @@ export default class Deck extends React.Component {
     const { deckList } = this.props;
     const { search, rarityFilter, isTrunfo } = this.state;
 
-    if (isTrunfo) {
+    if (isTrunfo && deckList.length > 0) {
       return [deckList.find(({ trunfoInput }) => trunfoInput === true)];
     }
 
