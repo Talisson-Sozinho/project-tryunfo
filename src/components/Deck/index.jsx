@@ -3,12 +3,38 @@ import React from 'react';
 import Card from '../Card';
 
 export default class Deck extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.state = {
+      search: '',
+    };
+  }
+
+  onInputChange({ target }) {
+    const { value } = target;
+    this.setState({
+      search: value,
+    });
+  }
+
   render() {
     const { deckList, removeCard } = this.props;
+    const { search } = this.state;
+
+    const renderDeckList = search.length > 0
+      ? deckList.filter(({ nameInput }) => nameInput.includes(search)) : deckList;
+
     return (
       <section className="deck-container">
+        <input
+          data-testid="name-filter"
+          type="text"
+          value={ search }
+          onChange={ this.onInputChange }
+        />
         {
-          deckList.map(({
+          renderDeckList.map(({
             nameInput,
             descriptionInput,
             attr1Input,
@@ -18,7 +44,7 @@ export default class Deck extends React.Component {
             rareInput,
             trunfoInput,
           }) => (
-            <article key={ nameInput } id="super-trunfo-card">
+            <article key={ nameInput } id={ trunfoInput ? 'super-trunfo-card' : null }>
               <Card
                 cardName={ nameInput }
                 cardDescription={ descriptionInput }
