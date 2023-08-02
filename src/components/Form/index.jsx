@@ -106,21 +106,23 @@ export default class Form extends React.Component {
           </select>
         </label>
 
-        { hasTrunfo ? (
-          <p>Você já tem um Super Trunfo em seu baralho</p>
-        ) : (
-          <label htmlFor="trunfo-input">
-            Super Trybe Trunfo
-            <input
-              id="trunfo-input"
-              name="trunfoInput"
-              data-testid="trunfo-input"
-              type="checkbox"
-              checked={ cardTrunfo }
-              onChange={ onInputChange }
-            />
-          </label>
-        )}
+        {
+          hasTrunfo ? (
+            <p>Você já tem um Super Trunfo em seu baralho</p>
+          ) : (
+            <label htmlFor="trunfo-input">
+              Super Trybe Trunfo
+              <input
+                id="trunfo-input"
+                name="trunfoInput"
+                data-testid="trunfo-input"
+                type="checkbox"
+                checked={ cardTrunfo }
+                onChange={ onInputChange }
+              />
+            </label>
+          )
+        }
 
         <button
           data-testid="save-button"
